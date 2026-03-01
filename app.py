@@ -6,29 +6,15 @@ from models import User as UserModel
 
 app = FastAPI()
 
-# ==============================
 # 1.1 Базовый JSON эндпоинт
-# ==============================
 
 @app.get("/")
 def read_root():
     return {"message": "Добро пожаловать в моё приложение FastAPI!"}
 
 
-# ==============================
-# 1.2 Возврат HTML файла
-# (если нужно вернуть HTML вместо JSON —
-# просто закомментируй read_root и раскомментируй код ниже)
-# ==============================
-
-# @app.get("/")
-# def read_html():
-#     return FileResponse("index.html")
-
-
-# ==============================
 # 1.3 POST /calculate
-# ==============================
+
 
 class Numbers(BaseModel):
     num1: float
@@ -39,9 +25,9 @@ def calculate(numbers: Numbers):
     return {"result": numbers.num1 + numbers.num2}
 
 
-# ==============================
+
 # 1.4 GET /users
-# ==============================
+
 
 user = UserModel(name="Eric", id=1)
 
@@ -50,9 +36,9 @@ def get_user():
     return user
 
 
-# ==============================
+
 # 1.5 POST /user (взрослый или нет)
-# ==============================
+
 
 class UserAge(BaseModel):
     name: str
@@ -67,9 +53,9 @@ def check_user(user: UserAge):
     }
 
 
-# ==============================
+
 # 2.1 POST /feedback
-# ==============================
+
 
 feedback_storage: List = []
 
@@ -85,9 +71,9 @@ def add_feedback(feedback: Feedback):
     }
 
 
-# ==============================
+
 # 2.2 Валидация + фильтр слов
-# ==============================
+
 
 class FeedbackValidated(BaseModel):
     name: str = Field(..., min_length=2, max_length=50)
